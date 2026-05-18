@@ -1,0 +1,26 @@
+name: Java CI/CD lab practice #name gives name to the workflow. Appears in Git hub Ctions tab
+on:           #defines when the workflow runs
+  push:       #workfloe starts when code is pushed to the repository
+    branches: #the workflow only runs when code is pushed to the specified branches. If pushed to other branches, the workflow will not run.
+      - main
+
+jobs:         #contains tasks that github shoud perform. Can contain one or more jobs. Each job runs in a separate runner environment.
+  build:      #build is the name of the job. You can choose any name for your job.
+    runs-on: ubuntu-latest     #pGitHub provides a virtual computer to run the workflow. Ubuntu-latest is means the workflow will run on the latest version of Ubuntu available in GitHub's virtual environment.
+
+    steps:    #steps are the actions executed one by one. Each step can run a command or an action. Actions are reusable pieces of code that can be used to perform common tasks, such as checking out code or setting up a programming language environment.
+      - name: Checkout Repository   # Name gives a readable name. Checks out the repository code so that the workflow can access it. This is necessary for the subsequent steps to compile and run the Java program.
+        uses: actions/checkout@v4   # uses specifies the action to use. In this case, it uses the checkout action from the actions repository. The @v4 indicates that it uses version 4 of the checkout action.
+
+      - name: Set up JDK 17         # installs Java Development Kit (JDK) version 17. This is necessary to compile and run Java programs. The setup-java action is used to set up the Java environment in the GitHub Actions runner.
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'  # Use the Temurin distribution of OpenJDK
+          java-version: '17'
+
+      - name: Compile Java Program
+        run: javac Main.java       # this step compiles the Java program. It uses the javac command to compile the Main.java file. If there are any compilation errors, the workflow will fail at this step.
+
+      - name: Run Java Program
+        run: java Main             # this step runs the compiled Java program. It uses the java command to execute the Main class. If the program runs successfully, it will output the results to the console. If there are any runtime errors, the workflow will fail at this step.
+  
