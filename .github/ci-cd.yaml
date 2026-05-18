@@ -18,9 +18,14 @@ jobs:         #contains tasks that github shoud perform. Can contain one or more
           distribution: 'temurin'  # Use the Temurin distribution of OpenJDK
           java-version: '17'
 
-      - name: Compile Java Program
-        run: javac Main.java       # this step compiles the Java program. It uses the javac command to compile the Main.java file. If there are any compilation errors, the workflow will fail at this step.
+      - name: Compile Java Files
+        run: javac*.java      # this step compiles the Java program. It uses the javac command to compile the Main.java file. If there are any compilation errors, the workflow will fail at this step.
 
       - name: Run Java Program
-        run: java Main             # this step runs the compiled Java program. It uses the java command to execute the Main class. If the program runs successfully, it will output the results to the console. If there are any runtime errors, the workflow will fail at this step.
+        run: java Main
+
+      - name: Run Tests
+        run: java CalculatorTest
+
+        
   
