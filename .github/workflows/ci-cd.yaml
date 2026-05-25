@@ -27,5 +27,8 @@ jobs:         #contains tasks that github shoud perform. Can contain one or more
       - name: Run Tests
         run: java CalculatorTest
 
+      - name: Run Custom Java Action
+        uses: ./.github/actions/java-build # this step uses a custom action defined in the .github/actions/java-build directory of the repository. This action compiles and runs the Java program as defined in the action.yaml file of the custom action.  
+
         
   

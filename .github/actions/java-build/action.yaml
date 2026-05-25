@@ -1,0 +1,16 @@
+name: "Java Build Action" # Name of the action. This is the name that will appear in the GitHub Actions marketplace and when you reference this action in your workflow.
+
+description: "Compile and run Java program" # Description of what the action does. This will appear in the GitHub Actions marketplace.
+
+runs:
+ using: "composite" # Specifies that this action is a composite action, which allows you to combine multiple steps into a single action.
+
+ steps:
+  - name: Compile Java   # Name of the step. This will appear in the GitHub Actions logs when this step is executed.
+    run: javac Main.java # This step compiles all Java files in the current directory using the javac command.
+    shell: bash          # Specifies that the terminal type. Required in composite actions
+
+
+  - name: Run Java       # Name of the step. This will appear in the GitHub Actions logs when this step is executed.
+    run: java Main       # This step runs the compiled Java program using the java command.
+    shell: bash   
